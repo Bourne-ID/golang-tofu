@@ -2,6 +2,8 @@
 Simple golang lib for TLS [Trust On First Use](https://en.wikipedia.org/wiki/Trust_on_first_use)
 which can be used to establish trust for self-signed server certificates.
 
+This fork has been modified to use sha256 hashing and excludes the 'SHA256 Fingerprint=' prefix when obtaining the fingerprint of the certificate
+
 First, call `GetFingerprints` to retrieve the server certificate details.
 The user should then perform validation through some side-band channel.
 Once the user has verified the certificate fingerprint, the fingerprint
