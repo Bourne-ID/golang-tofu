@@ -2,7 +2,7 @@ package tofu
 
 import (
 	"bytes"
-	"crypto/sha1"
+	"crypto/sha256"
 	"crypto/tls"
 	"errors"
 	"fmt"
@@ -108,10 +108,10 @@ func GetTofuClient(fingerprint string) (*http.Client, error) {
 }
 
 func getFingerprint(der []byte) string {
-	hash := sha1.Sum(der)
+	hash := sha256.Sum256(der)
 	hexified := make([][]byte, len(hash))
 	for i, data := range hash {
 		hexified[i] = []byte(fmt.Sprintf("%02X", data))
 	}
-	return fmt.Sprintf("SHA1 Fingerprint=%s", string(bytes.Join(hexified, []byte(":"))))
+	return string(bytes.Join(hexified, []byte(":")))
 }
